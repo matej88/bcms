@@ -31,7 +31,20 @@ const createStore = () => {
 				vuexContext.commit('setPosts', posts);
 			},
 			nuxtServerInit(vuexContext, context) {
-				return axios.get('https://base-cms-a171d.firebaseio.com/posts.json')
+				return context.app.$storyapi.get('cdn/stories', {
+					version: 'draft',
+					starts_with: 'blog/'
+				}).then( res => {
+					console.log("RES", res.data.stories);
+					const postArray = []
+					for ( const key in res.data.stories) {
+						postArray.push({...res.data.stories[key].content, id: key, slug: res.data.stories[key].slug})
+					}
+					vuexContext.commit('setPosts', postArray)
+
+				})
+				.catch( e => context.error(e));
+				/*return axios.get('https://base-cms-a171d.firebaseio.com/posts.json')
 				.then( res => {
 					const postsArray = []
 					for ( const key in res.data) {
@@ -39,7 +52,7 @@ const createStore = () => {
 					}
 					vuexContext.commit('setPosts', postsArray)
 				})
-				.catch( e => context.error(e));
+				.catch( e => context.error(e));*/
 			},
 			addPost( vuexContext, post) {
 				const createdPost = {
@@ -114,6 +127,7 @@ const createStore = () => {
 				vuexContext.commit('clearToken')
 				Cookie.remove('token')
 				Cookie.remove('expirationDate')
+				
 				if(process.client) {
 					localStorage.removeItem('token')
 					localStorage.removeItem('tokenExpiration')

@@ -15,20 +15,22 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Staatliches' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css' }
     ]
   },
 
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#ccc', height:'10px', duration: 5000 },
+  loading: { color: '#ccc', height:'5px', duration: 5000 },
 
   /*
   ** Global CSS
   */
   css: [
-  '~assets/styles/main.css'
+  '~/assets/styles/main.css'
   ],
 
   /*
@@ -43,7 +45,10 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
+    '@neneos/nuxt-animate.css',
+    ['storyblok-nuxt', {accessToken: 'cr8zd06JFQMS4JVYzb3Ybwtt', chacheProvider: 'memory'} ]
   ],
+  
   axios: {
     baseURL: process.env.BASE_URL || 'https://base-cms-a171d.firebaseio.com'
   },
