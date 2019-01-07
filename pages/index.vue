@@ -133,9 +133,13 @@
     </section>
 
 
-    <section class="pricing-and-times">
+    <section class="container timetable">
       <Schedule />
     </section>
+
+    <selection class="container pricing">
+
+    </selection>
   </div>
 </template>
 
@@ -171,7 +175,11 @@
 
 
 <style scoped>
-
+.timetable {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
 .news-explainer-container h1 {
   margin: 0;
   padding: 0;
